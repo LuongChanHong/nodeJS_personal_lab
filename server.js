@@ -4,8 +4,8 @@ const path = require("path");
 const bodyParser = require("body-parser");
 
 const app = express();
-const adminRoutes = require("./routes/admin");
-const shopRoutes = require("./routes/shop");
+const adminData = require("./routes/admin");
+const shopData = require("./routes/shop");
 
 // xử lí parse cho data request body gửi từ form input
 // như đã xử lí trong lab04 (Buffer.concat(chunkDataFromRequest).toString())
@@ -18,8 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // vậy path css trong file html không cần /public
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/admin", adminRoutes);
-app.use(shopRoutes);
+app.use("/admin", adminData.route);
+app.use(shopData.route);
 app.use((request, response, next) => {
   response.status(404).sendFile(path.join(__dirname, "MVCviews", "404.html"));
 });

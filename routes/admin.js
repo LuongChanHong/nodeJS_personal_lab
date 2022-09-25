@@ -4,6 +4,8 @@ const path = require("path");
 const router = express.Router();
 const rootDirectory = require("../util/path");
 
+const products = [];
+
 // /admin/add-product
 router.get("/add-product", (request, response, next) => {
   // rootDirectory thay thế cho __dirname, "../"
@@ -11,9 +13,10 @@ router.get("/add-product", (request, response, next) => {
 });
 
 // /admin/product
-router.post("/product", (request, response) => {
-  console.log(request.body);
+router.post("/add-product", (request, response) => {
+  products.push({ title: request.body.title });
   response.redirect("/");
 });
 
-module.exports = router;
+exports.route = router;
+exports.products = products;

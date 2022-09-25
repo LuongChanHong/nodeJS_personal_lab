@@ -1,5 +1,6 @@
 Nội dung app:
-- dùng path tĩnh(static) hỗ trợ bởi express để truyền file css,img,... vào html
+- đổi các export file trong routes
+- share data giữa các page qua import/ export
 
 Set up server app: 
 - Tạo file package.json: npm init
