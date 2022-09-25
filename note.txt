@@ -1,2 +1,2 @@
-- Cài đặt NodeJS
-- Tạo server đơn giản
+- Gửi request đơn giản
+- Xuất response text gửi từ request ra file txt
