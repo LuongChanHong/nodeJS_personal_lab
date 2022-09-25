@@ -1,8 +1,8 @@
 Nội dung app:
-- Cài express JS: npm i --save express 
-//cần dùng express trong cả giai đoạn production nên không có -dev
-
-- Set up và dùng middleware qua hàm use()
+- Điều hướng, xử lí các route bằng express
+- Cài --save body-parser
+- Dùng body-parser parse data từ form input
+- Thay use() trong /product sang post, để page đó chỉ chạy khi có request post xảy ra
 
 Set up server app: 
 - Tạo file package.json: npm init
@@ -12,7 +12,7 @@ Set up server app:
 - Cài nodemon: npm i nodemon --save-dev 
 // -dev là do ta chỉ dùng nodemon trong lúc dựng app,
  giai đoạn production/ deploy thì không cần
-
+ 
 - thêm file launch.json: RUN => add configuration => NodeJS
 
 - Set up script launch.json auto restart debugger khi save file:

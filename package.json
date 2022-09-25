@@ -1,19 +1,19 @@
 {
-  "name": "lab05",
+  "name": "lab06",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
-    "start-server": "nodemon server.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "nodemon": "^2.0.20"
   },
   "dependencies": {
+    "body-parser": "^1.20.0",
     "express": "^4.18.1"
   }
 }
