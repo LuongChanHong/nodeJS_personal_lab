@@ -1,9 +1,12 @@
 const express = require("express");
+const path = require("path");
 const router = express.Router();
 
-// get() chỉ hoạt động khi có resquest get, vừa đảm bảo chỉ hoạt động khi path chính xác
+// __dirname đại diện cho thư mục cha chứa file hiện tại (routes)
+// path.join sẽ tạo url(file system) chạy được trên cả win và linux
+// do có tính năng xác nhận hệ điều hành đang chạy và tạo url tương ứng
 router.get("/", (request, response, next) => {
-  response.send("<h1>some html page</h1>");
+  response.sendFile(path.join(__dirname, "../", "MVCviews", "shop.html"));
 });
 
 module.exports = router;
