@@ -1,29 +1,11 @@
 const express = require("express");
-const path = require("path");
-
 const router = express.Router();
-const rootDirectory = require("../util/path");
 
-const products = [];
+const productsController = require("../controllers/products");
 
-// /admin/add-product
-router.get("/add-product", (request, response, next) => {
-  // rootDirectory thay thế cho __dirname, "../"
-  // response.sendFile(path.join(rootDirectory, "MVCviews", "add-product.html"));
-  response.render("add-product", {
-    docTitle: "Add Product",
-    activePage: "add-product",
-    activeAddProduct: true,
-    productCSS: true,
-    formCSS: true,
-  });
-});
+// không xài () sau tên function, vì ta chưa thực thi ngay function
+router.get("/add-product", productsController.getAddProduct);
 
-// /admin/product
-router.post("/add-product", (request, response) => {
-  products.push({ title: request.body.title });
-  response.redirect("/");
-});
+router.post("/add-product", productsController.postAddProduct);
 
-exports.route = router;
-exports.products = products;
+module.exports = router;

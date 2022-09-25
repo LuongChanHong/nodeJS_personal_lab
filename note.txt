@@ -1,6 +1,7 @@
 Nội dung app:
-- dùng Template Engine EJS đưa nội dung động vào html
-- tác sử dụng giao diện được dùng nhiều lần
+- thêm controller(MVC) cho các views
+- thêm model(MVC) xử lí data thuộc class Product
+- đọc, ghi data từ file JSON ra UI
 
 Set up server app: 
 - Tạo file package.json: npm init

@@ -2,15 +2,16 @@ const http = require("http");
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-
 const app = express();
-const adminData = require("./routes/admin");
-const shopData = require("./routes/shop");
+
+const adminRoutes = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
+const errorController = require("./controllers/error");
 
 // khai báo với express server sẽ dùng EJS để biên dịch nội dung động html
 app.set("view engine", "ejs");
-// các nội dung này sẽ chứa trong MVCviews
-app.set("views", "MVCviews");
+// các nội dung này sẽ chứa trong views
+app.set("views", "views");
 
 // xử lí parse cho data request body gửi từ form input
 // như đã xử lí trong lab04 (Buffer.concat(chunkDataFromRequest).toString())
@@ -23,12 +24,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // vậy path css trong file html không cần /public
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/admin", adminData.route);
-app.use(shopData.route);
-app.use((request, response, next) => {
-  // response.status(404).sendFile(path.join(__dirname, "MVCviews", "404.html"));
-  response.status(404).render("404", { docTitle: "404 Not found" });
-});
+app.use("/admin", adminRoutes);
+app.use(shopRoutes);
+app.use(errorController.get404);
 
 const server = http.createServer(app);
 
