@@ -25,17 +25,17 @@ function requestListener(request, response) {
     request.on("end", () => {
       const parsedBody = Buffer.concat(body).toString();
       const dataFromRequest = parsedBody.split("=")[1];
-      fileSystem.writeFileSync("message.txt", dataFromRequest);
+      fileSystem.writeFile("message.txt", dataFromRequest, (error) => {
+        response.statusCode = 302;
+        response.setHeader("Location", "/");
+        return response.end();
+      });
     });
-    fileSystem.writeFileSync("message.txt", "some text");
-    response.statusCode = 302;
-    response.setHeader("Location", "/");
-    return response.end();
   }
   response.setHeader("Content-Type", "text/html");
   response.write("<html>");
   response.write("<head><title>HOME PAGE</title></head>");
-  response.write("<body><h1>HOME PAGE</h1></body>");
+  response.write("<body><h1>not thing done</h1></body>");
   response.write("</html>");
   response.end();
 }

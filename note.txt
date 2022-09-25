@@ -1,2 +1,1 @@
-- Gửi request đơn giản
-- Xuất response text gửi từ request ra file txt
+- Blocking/Non-Blocking Code thông qua writeFile() và writeFileSync()
