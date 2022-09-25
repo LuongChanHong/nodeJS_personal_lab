@@ -2,12 +2,12 @@ const express = require("express");
 const path = require("path");
 
 const router = express.Router();
+const rootDirectory = require("../util/path");
 
 // /admin/add-product
 router.get("/add-product", (request, response, next) => {
-  response.sendFile(
-    path.join(__dirname, "../", "MVCviews", "add-product.html")
-  );
+  // rootDirectory thay thế cho __dirname, "../"
+  response.sendFile(path.join(rootDirectory, "MVCviews", "add-product.html"));
 });
 
 // /admin/product

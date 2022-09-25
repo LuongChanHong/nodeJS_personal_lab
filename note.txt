@@ -1,5 +1,5 @@
 Nội dung app:
-- load file html khi nhập url
+- dùng path tĩnh(static) hỗ trợ bởi express để truyền file css,img,... vào html
 
 Set up server app: 
 - Tạo file package.json: npm init
