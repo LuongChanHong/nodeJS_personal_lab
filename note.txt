@@ -1,6 +1,5 @@
 Nội dung app:
-- đổi các export file trong routes
-- share data giữa các page qua import/ export
+- dùng Template Engine Pug đưa nội dung động vào html
 
 Set up server app: 
 - Tạo file package.json: npm init
