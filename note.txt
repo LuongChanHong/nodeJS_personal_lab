@@ -1,5 +1,6 @@
 Nội dung app:
-- dùng Template Engine Pug đưa nội dung động vào html
+- thêm layout dùng chung và áp dụng dynamic content cho tất cả page
+- active menu
 
 Set up server app: 
 - Tạo file package.json: npm init

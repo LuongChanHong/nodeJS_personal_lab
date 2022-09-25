@@ -9,7 +9,11 @@ const products = [];
 // /admin/add-product
 router.get("/add-product", (request, response, next) => {
   // rootDirectory thay thế cho __dirname, "../"
-  response.sendFile(path.join(rootDirectory, "MVCviews", "add-product.html"));
+  // response.sendFile(path.join(rootDirectory, "MVCviews", "add-product.html"));
+  response.render("add-product", {
+    docTitle: "Add Product",
+    activePage: "add-product",
+  });
 });
 
 // /admin/product

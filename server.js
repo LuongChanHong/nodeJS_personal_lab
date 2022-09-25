@@ -26,7 +26,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/admin", adminData.route);
 app.use(shopData.route);
 app.use((request, response, next) => {
-  response.status(404).sendFile(path.join(__dirname, "MVCviews", "404.html"));
+  // response.status(404).sendFile(path.join(__dirname, "MVCviews", "404.html"));
+  response.status(404).render("404", { docTitle: "404 Not found" });
 });
 
 const server = http.createServer(app);

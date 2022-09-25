@@ -8,7 +8,11 @@ const adminData = require("./admin");
 router.get("/", (request, response, next) => {
   const products = adminData.products;
   // render template html chứa nội dung động
-  response.render("shop", { prods: products, docTitle: "Shop" });
+  response.render("shop", {
+    prods: products,
+    docTitle: "Shop",
+    activePage: "shop",
+  });
 });
 
 exports.route = router;
