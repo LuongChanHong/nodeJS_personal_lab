@@ -11,7 +11,10 @@ router.get("/", (request, response, next) => {
   response.render("shop", {
     prods: products,
     docTitle: "Shop",
-    activePage: "shop",
+    activePage: "/",
+    hasProduct: products.length > 0,
+    activeShop: true,
+    productCSS: true,
   });
 });
 

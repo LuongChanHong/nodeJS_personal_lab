@@ -1,5 +1,5 @@
 Nội dung app:
-- thêm layout dùng chung và áp dụng dynamic content cho tất cả page
+- dùng Template Engine handlebars đưa nội dung động vào html
 - active menu
 
 Set up server app: 

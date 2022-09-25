@@ -13,6 +13,9 @@ router.get("/add-product", (request, response, next) => {
   response.render("add-product", {
     docTitle: "Add Product",
     activePage: "add-product",
+    activeAddProduct: true,
+    productCSS: true,
+    formCSS: true,
   });
 });
 

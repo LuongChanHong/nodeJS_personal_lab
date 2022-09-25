@@ -2,13 +2,23 @@ const http = require("http");
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
+const handlebars = require("express-handlebars");
 
 const app = express();
 const adminData = require("./routes/admin");
 const shopData = require("./routes/shop");
 
-// khai báo với express server sẽ dùng pug để biên dịch nội dung động html
-app.set("view engine", "pug");
+// khai báo engine không build-in express
+app.engine(
+  "hbs",
+  handlebars.engine({
+    layoutsDir: "MVCviews/layouts",
+    defaultLayout: "main-layout.hbs",
+    extname: "hbs",
+  })
+);
+// khai báo với express server sẽ dùng handlebars để biên dịch nội dung động html
+app.set("view engine", "hbs");
 // các nội dung này sẽ chứa trong MVCviews
 app.set("views", "MVCviews");
 
