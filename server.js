@@ -1,14 +1,20 @@
-// mở terminal gõ node server.js để chạy
-// nhập url localhost:3000 vào browser để tương tác với server
-
 const http = require("http");
-//C1:
-const routes = require("./routes");
-//C2:
-// const routes = require("./routes");
+const express = require("express");
 
-// function requestListener(request, response) {}
+const app = express();
 
-const server = http.createServer(routes.handler);
+// thêm và xử dụng middleware
+// hàm trong use sẽ khởi chạy mỗi khi có request
+app.use((request, response, next) => {
+  console.log("middleware run");
+  next(); // cho phép request được chạy đến middleware tiếp theo
+});
+
+app.use((request, response, next) => {
+  console.log("middleware run again");
+  response.send("<h1>some html</h1>");
+});
+
+const server = http.createServer(app);
 
 server.listen(3000);

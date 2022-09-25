@@ -1,2 +1,25 @@
-- Using node modules system
-- Exports/ import(require) function
+Nội dung app:
+- Cài express JS: npm i --save express 
+//cần dùng express trong cả giai đoạn production nên không có -dev
+
+- Set up và dùng middleware qua hàm use()
+
+Set up server app: 
+- Tạo file package.json: npm init
+
+- Set up script khởi chạy: "start": "nodemon server.js",
+
+- Cài nodemon: npm i nodemon --save-dev 
+// -dev là do ta chỉ dùng nodemon trong lúc dựng app,
+ giai đoạn production/ deploy thì không cần
+
+- thêm file launch.json: RUN => add configuration => NodeJS
+
+- Set up script launch.json auto restart debugger khi save file:
+"program": "${workspaceFolder}\\server.js",
+// setup restart debugger khi sửa đổ code trong lúc debug
+"restart": true,
+"runtimeExecutable": "nodemon",
+// setup restart nodemon khi sửa đổ code trong lúc debug
+"console": "integratedTerminal"
+
