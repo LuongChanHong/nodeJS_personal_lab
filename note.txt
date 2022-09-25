@@ -1,6 +1,6 @@
 Nội dung app:
-- dùng Template Engine handlebars đưa nội dung động vào html
-- active menu
+- dùng Template Engine EJS đưa nội dung động vào html
+- tác sử dụng giao diện được dùng nhiều lần
 
 Set up server app: 
 - Tạo file package.json: npm init
