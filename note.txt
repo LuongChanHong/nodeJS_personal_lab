@@ -1,8 +1,9 @@
 Nội dung app:
-- Điều hướng, xử lí các route bằng express
-- Cài --save body-parser
-- Dùng body-parser parse data từ form input
-- Thay use() trong /product sang post, để page đó chỉ chạy khi có request post xảy ra
+- chia các function path ra các file js khác nhau
+- thêm trang 404 khi sai path
+- tránh tình trạng lặp 1 phần của path 
+bằng cách thêm /admin vào server.user() adminRoutes
+- thêm 2 view
 
 Set up server app: 
 - Tạo file package.json: npm init

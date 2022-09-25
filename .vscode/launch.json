@@ -10,11 +10,9 @@
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}\\server.js",
-      // setup restart debugger khi sửa đổ code trong lúc debug
       "restart": true,
-      "runtimeExecutable": "nodemon",
-      // setup restart nodemon khi sửa đổ code trong lúc debug
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "runtimeExecutable": "nodemon"
     }
   ]
 }

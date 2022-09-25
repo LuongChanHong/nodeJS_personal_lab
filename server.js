@@ -3,27 +3,18 @@ const express = require("express");
 
 const bodyParser = require("body-parser");
 const app = express();
+const adminRoutes = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
 
 // xử lí parse cho data request body gửi từ form input
 // như đã xử lí trong lab04 (Buffer.concat(chunkDataFromRequest).toString())
 // extended: false: cho phép parse các feature ngoài mặc định
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// thêm và xử dụng middleware
-// hàm trong use sẽ khởi chạy mỗi khi có request
-app.use("/add-product", (request, response, next) => {
-  response.send(
-    "<form action='/product' method='POST'><input type='text' name='title'><button type='submit'>add product</button></form>"
-  );
-});
-
-app.post("/product", (request, response) => {
-  console.log(request.body);
-  response.redirect("/");
-});
-
-app.use("/", (request, response, next) => {
-  response.send("<h1>some html page</h1>");
+app.use("/admin", adminRoutes);
+app.use(shopRoutes);
+app.use((request, response, next) => {
+  response.status(404).send("<h1>Page not found</h1>");
 });
 
 const server = http.createServer(app);
