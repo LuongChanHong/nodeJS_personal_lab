@@ -22,7 +22,7 @@ exports.getProducts = (request, response, next) => {
   // callback trong fetchAll sẽ tự thực thi khi fetchAll thực thi xong
   Product.fetchAll((productList) => {
     // render template html chứa nội dung động
-    response.render("shop", {
+    response.render("product-list", {
       prods: productList,
       docTitle: "Shop",
       activePage: "/",
