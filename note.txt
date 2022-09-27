@@ -1,8 +1,6 @@
 Nội dung app:
-- thêm controller(MVC) cho các views
-- thêm model(MVC) xử lí data thuộc class Product
-- đọc, ghi data từ file JSON ra UI
-- 
+- thêm views, controller mới
+- thêm dynamic param vào url (product id), hiện product detail
 
 Set up server app: 
 - Tạo file package.json: npm init
