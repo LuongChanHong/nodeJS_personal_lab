@@ -1,6 +1,6 @@
 Nội dung app:
-- truyền object vào thẻ UI mở rộng/ dùng chung ejs
-- truyền data vào url post cart thông qua add to cart button
+- thêm nội dung input UI edit product ở url http://localhost:3000/admin/edit-product/1?edit=true
+
 
 Set up server app: 
 - Tạo file package.json: npm init
