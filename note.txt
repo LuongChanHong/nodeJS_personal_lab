@@ -1,6 +1,5 @@
 Nội dung app:
-- liên kết đến trang edit product từ admin product
-- thêm chức năng edit product trong admin product page
+- thêm card model, chức năng thêm product vào cart
 
 
 Set up server app: 
