@@ -1,6 +1,6 @@
 Nội dung app:
-- thêm card model, chức năng thêm product vào cart
-
+- thêm chức năng xóa product trong cart
+- thêm chức năng xóa product trong product list
 
 Set up server app: 
 - Tạo file package.json: npm init
