@@ -27,7 +27,14 @@
             <p class="product__description"><%= item.product.description %></p>
           </div>
           <div class="card__actions">
-            <a href="/products/<%= item.product.id%>" class="btn">Details</a>
+            <form action="/cart-delete-item" method="POST">
+              <input
+                type="hidden"
+                name="productID"
+                value="<%= item.product.id %>"
+              />
+              <button type="submit">Delete</button>
+            </form>
           </div>
         </article>
         <% } %>

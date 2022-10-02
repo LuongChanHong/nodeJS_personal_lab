@@ -85,3 +85,11 @@ exports.getCart = (req, res, next) => {
     });
   });
 };
+
+exports.postCartDeleteProduct = (req, res, next) => {
+  const productsID = req.body.productID;
+  Product.findById(productsID, (product) => {
+    Cart.deleteProduct(productsID, product.price);
+    res.redirect("/cart");
+  });
+};

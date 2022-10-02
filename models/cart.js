@@ -11,7 +11,6 @@ module.exports = class Cart {
       if (!error) {
         cart = JSON.parse(fileContent);
         const index = cart.products.findIndex((item) => item.id === id);
-        console.log("index:", index);
         updatedProducts = cart.products[index];
         if (updatedProducts) {
           updatedProducts.quantity = updatedProducts.quantity + 1;
@@ -36,7 +35,6 @@ module.exports = class Cart {
       const cart = JSON.parse(fileContent);
       const willDeleteProduct = cart.products.find((item) => item.id === id);
       const quantity = willDeleteProduct.quantity;
-
       cart.products = cart.products.filter((item) => item.id !== id);
       cart.totalPrice = cart.totalPrice - price * quantity;
       fs.writeFile(p, JSON.stringify(cart), (err) => {

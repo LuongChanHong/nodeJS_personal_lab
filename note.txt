@@ -1,5 +1,5 @@
 Nội dung app:
-- Hiện danh sách product trong cart ra màn hình
+- xóa product trong cart 
 
 Set up server app: 
 - Tạo file package.json: npm init
