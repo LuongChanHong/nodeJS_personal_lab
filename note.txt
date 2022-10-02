@@ -1,6 +1,5 @@
 Nội dung app:
-- thêm chức năng xóa product trong cart
-- thêm chức năng xóa product trong product list
+- Hiện danh sách product trong cart ra màn hình
 
 Set up server app: 
 - Tạo file package.json: npm init

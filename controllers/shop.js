@@ -61,3 +61,27 @@ exports.getCheckout = (req, res, next) => {
     pageTitle: "Checkout",
   });
 };
+
+exports.getCart = (req, res, next) => {
+  Cart.getCart((cart) => {
+    Product.fetchAll((products) => {
+      const cartProductsExist = [];
+      products.forEach((product) => {
+        const cartProduct = cart.products.find(
+          (item) => item.id === product.id
+        );
+        if (cartProduct) {
+          cartProductsExist.push({
+            product: product,
+            quantity: cartProduct.quantity,
+          });
+        }
+      });
+      res.render("shop/cart", {
+        path: "/cart",
+        pageTitle: "Your Cart",
+        products: cartProductsExist,
+      });
+    });
+  });
+};
