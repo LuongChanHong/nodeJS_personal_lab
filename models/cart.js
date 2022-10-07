@@ -34,6 +34,9 @@ module.exports = class Cart {
       }
       const cart = JSON.parse(fileContent);
       const willDeleteProduct = cart.products.find((item) => item.id === id);
+      if (!willDeleteProduct) {
+        return;
+      }
       const quantity = willDeleteProduct.quantity;
       cart.products = cart.products.filter((item) => item.id !== id);
       cart.totalPrice = cart.totalPrice - price * quantity;
