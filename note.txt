@@ -1,5 +1,7 @@
 Nội dung app:
-- xóa product trong cart 
+- kết nối/ truy xuất dữ liệu từ mysql
+- thêm data vào database
+
 
 Set up server app: 
 - Tạo file package.json: npm init
