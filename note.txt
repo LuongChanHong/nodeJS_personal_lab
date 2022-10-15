@@ -1,6 +1,6 @@
 Nội dung app:
-- kết nối/ truy xuất dữ liệu từ mysql
-- thêm data vào database
+
+- tạo cart, cartItem model
 
 
 Set up server app: 
