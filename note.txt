@@ -1,5 +1,5 @@
 Nội dung app:
-- thêm item vào cart
+- xóa item trong cart
 
 
 Set up server app: 
