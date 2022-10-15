@@ -1,5 +1,5 @@
 Nội dung app:
-
+- merge code
 - tạo cart, cartItem model
 
 
