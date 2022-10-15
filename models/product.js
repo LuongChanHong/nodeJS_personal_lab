@@ -1,6 +1,9 @@
+
 const Sequelize = require("sequelize");
 
+
 const sequelize = require("../util/db");
+
 
 const Product = sequelize.define("product", {
   id: {
@@ -17,8 +20,10 @@ const Product = sequelize.define("product", {
 
 module.exports = Product;
 
+
 // const fs = require("fs");
 // const path = require("path");
+
 
 // const Cart = require("./cart");
 
@@ -90,3 +95,4 @@ module.exports = Product;
 //     });
 //   }
 // };
+

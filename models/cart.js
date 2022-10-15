@@ -1,3 +1,4 @@
+
 const Sequelize = require("sequelize");
 
 const sequelize = require("../util/db");
@@ -69,3 +70,4 @@ module.exports = Cart;
 //     });
 //   }
 // };
+

@@ -32,15 +32,18 @@ exports.getProduct = (req, res, next) => {
 };
 
 exports.getIndex = (req, res, next) => {
+
   Product.findAll()
     .then((data) => {
       res.render("shop/index", {
         prods: data,
+
         pageTitle: "Shop",
         path: "/",
       });
     })
     .catch((err) => console.log("err:", err));
+
   // Product.fetchAll((products) => {
   //   res.render("shop/index", {
   //     prods: products,
@@ -48,6 +51,7 @@ exports.getIndex = (req, res, next) => {
   //     path: "/",
   //   });
   // });
+
 };
 
 exports.getCart = (req, res, next) => {

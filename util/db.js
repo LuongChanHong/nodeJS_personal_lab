@@ -1,3 +1,4 @@
+
 const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize("node_db", "root", "123456789", {
@@ -6,3 +7,4 @@ const sequelize = new Sequelize("node_db", "root", "123456789", {
 });
 
 module.exports = sequelize;
+

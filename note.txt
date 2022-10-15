@@ -1,5 +1,7 @@
 Nội dung app:
+
 - tạo cart, cartItem model
+
 
 Set up server app: 
 - Tạo file package.json: npm init
