@@ -32,7 +32,6 @@ exports.getProduct = (req, res, next) => {
 };
 
 exports.getIndex = (req, res, next) => {
-
   Product.findAll()
     .then((data) => {
       res.render("shop/index", {
@@ -43,23 +42,14 @@ exports.getIndex = (req, res, next) => {
       });
     })
     .catch((err) => console.log("err:", err));
-
-  // Product.fetchAll((products) => {
-  //   res.render("shop/index", {
-  //     prods: products,
-  //     pageTitle: "Shop",
-  //     path: "/",
-  //   });
-  // });
-
 };
 
-exports.getCart = (req, res, next) => {
-  res.render("shop/cart", {
-    path: "/cart",
-    pageTitle: "Your Cart",
-  });
-};
+// exports.getCart = (req, res, next) => {
+//   res.render("shop/cart", {
+//     path: "/cart",
+//     pageTitle: "Your Cart",
+//   });
+// };
 
 exports.postCart = (req, res, next) => {
   const productID = req.body.productID;
