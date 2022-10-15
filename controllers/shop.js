@@ -53,11 +53,33 @@ exports.getIndex = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const productID = req.body.productID;
-  console.log("productID:", productID);
-  Product.findById(productID, (product) => {
-    Cart.addProduct(productID, product.price);
-  });
-  res.redirect("/cart");
+  // console.log("productID:", productID);
+  let newQuantity = 1;
+  let _cart;
+  req.user
+    .getCart()
+    .then((cart) => {
+      _cart = cart;
+      return cart.getProducts({ where: { id: productID } });
+    })
+    .then((products) => {
+      let product;
+      // trường hợp đã có product trong cart
+      if (products.length > 0) {
+        product = products[0];
+      }
+      if (product) {
+        const oldQuantity = product.cartItem.quantity;
+        newQuantity = oldQuantity + 1;
+      }
+      // trường hợp chưa có product trong cart
+      return Product.findByPk(productID);
+    })
+    .then((product) => {
+      _cart.addProduct(product, { through: { quantity: newQuantity } });
+      res.redirect("/cart");
+    })
+    .catch((err) => console.log("err:", err));
 };
 
 exports.getOrders = (req, res, next) => {
@@ -75,27 +97,22 @@ exports.getCheckout = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-  Cart.getCart((cart) => {
-    Product.fetchAll((products) => {
-      const cartProductsExist = [];
-      products.forEach((product) => {
-        const cartProduct = cart.products.find(
-          (item) => item.id === product.id
-        );
-        if (cartProduct) {
-          cartProductsExist.push({
-            product: product,
-            quantity: cartProduct.quantity,
+  req.user
+    .getCart()
+    .then((cart) => {
+      cart
+        .getProducts()
+        .then((products) => {
+          // console.log("products:", products);
+          res.render("shop/cart", {
+            path: "/cart",
+            pageTitle: "Your Cart",
+            products: products,
           });
-        }
-      });
-      res.render("shop/cart", {
-        path: "/cart",
-        pageTitle: "Your Cart",
-        products: cartProductsExist,
-      });
-    });
-  });
+        })
+        .catch((err) => console.log("err:", err));
+    })
+    .catch((err) => console.log("err:", err));
 };
 
 exports.postCartDeleteProduct = (req, res, next) => {
