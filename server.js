@@ -12,6 +12,8 @@ const Product = require("./models/product");
 const User = require("./models/user");
 const Cart = require("./models/cart");
 const CartItem = require("./models/cartItem");
+const Order = require("./models/order");
+const OrderItem = require("./models/OrderItem");
 
 const app = express();
 
@@ -47,6 +49,8 @@ User.hasMany(Product, { constranints: true, onDelete: "CASCADE" });
 User.hasOne(Cart);
 Cart.hasMany(CartItem);
 Cart.belongsToMany(Product, { through: CartItem });
+User.hasMany(Order);
+Order.belongsToMany(Product, { through: OrderItem });
 // Product.belongsToMany(Cart);
 
 sequelize
@@ -68,6 +72,6 @@ sequelize
   //   app.listen(3000);
   // })
   .then((user) => {
-    app.listen(3000);
+    app.listen(4000);
   })
   .catch((err) => console.log("err:", err));

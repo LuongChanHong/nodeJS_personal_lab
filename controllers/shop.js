@@ -1,5 +1,6 @@
 const Product = require("../models/product");
 const Cart = require("../models/cart");
+const Order = require("../models/order");
 
 exports.getProducts = (req, res, next) => {
   Product.findAll()
@@ -103,7 +104,7 @@ exports.getCart = (req, res, next) => {
       cart
         .getProducts()
         .then((products) => {
-          // console.log("products:", products);
+          console.log("products:", products);
           res.render("shop/cart", {
             path: "/cart",
             pageTitle: "Your Cart",
@@ -126,6 +127,31 @@ exports.postCartDeleteProduct = (req, res, next) => {
       let product = products[0];
       product.cartItem.destroy();
       res.redirect("/cart");
+    })
+    .catch((err) => console.log("err:", err));
+};
+
+exports.postOrder = (req, res, next) => {
+  req.user
+    .getCart()
+    .then((cart) => {
+      return cart.getProducts();
+    })
+    .then((products) => {
+      return req.user
+        .createOrder()
+        .then((order) => {
+          return order.addProducts(
+            products.map((product) => {
+              product.orderItem = { quantity: product.cartItem.quantity };
+              return product;
+            })
+          );
+        })
+        .catch((err) => console.log("err:", err));
+    })
+    .then((result) => {
+      res.redirect("/orders");
     })
     .catch((err) => console.log("err:", err));
 };
