@@ -1,6 +1,6 @@
 Nội dung app:
-- xóa item trong cart
-
+- kết nối mongodb
+- tạo model Product trong mongodb db
 
 Set up server app: 
 - Tạo file package.json: npm init

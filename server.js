@@ -1,19 +1,12 @@
 const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
-const db = require("./util/db");
+
+const mongoConnect = require("./util/db").mongoConnect;
 
 const errorController = require("./controllers/error");
-const sequelize = require("./util/db");
 const adminRoutes = require("./routes/admin");
-const shopRoutes = require("./routes/shop");
-
-const Product = require("./models/product");
-const User = require("./models/user");
-const Cart = require("./models/cart");
-const CartItem = require("./models/cartItem");
-const Order = require("./models/order");
-const OrderItem = require("./models/OrderItem");
+// const shopRoutes = require("./routes/shop");
 
 const app = express();
 
@@ -31,47 +24,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((request, response, next) => {
-  User.findByPk(1)
-    .then((user) => {
-      request.user = user;
-      // console.log("request.user:", request.user);
-      next();
-    })
-    .catch((err) => console.log("err:", err));
+  // User.findByPk(1)
+  //   .then((user) => {
+  //     request.user = user;
+  //     // console.log("request.user:", request.user);
+  //     next();
+  //   })
+  //   .catch((err) => console.log("err:", err));
+  next();
 });
 
 app.use("/admin", adminRoutes);
-app.use(shopRoutes);
+// app.use(shopRoutes);
 app.use(errorController.get404);
 
-// Product.belongsTo(User, { constranints: true, onDelete: "CASCADE" });
-User.hasMany(Product, { constranints: true, onDelete: "CASCADE" });
-User.hasOne(Cart);
-Cart.hasMany(CartItem);
-Cart.belongsToMany(Product, { through: CartItem });
-User.hasMany(Order);
-Order.belongsToMany(Product, { through: OrderItem });
-// Product.belongsToMany(Cart);
-
-sequelize
-  // .sync({ force: true })
-  .sync()
-  .then((result) => {
-    return User.findByPk(1);
-  })
-  .then((user) => {
-    if (!user) {
-      return User.create({ name: "User", email: "somemail@mail.com" });
-    }
-    return user;
-  })
-  // .then((user) => {
-  //   return user.createCart();
-  // })
-  // .then((cart) => {
-  //   app.listen(3000);
-  // })
-  .then((user) => {
-    app.listen(4000);
-  })
-  .catch((err) => console.log("err:", err));
+mongoConnect(() => {
+  app.listen(3000);
+});
