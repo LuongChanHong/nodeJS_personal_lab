@@ -85,18 +85,12 @@ exports.getProducts = (req, res, next) => {
       });
     })
     .catch((err) => console.log("err:", err));
-  // Product.findAll()
-  //   .then((data) => {
-  //     res.render("admin/products", {
-  //       prods: data,
-  //       pageTitle: "Admin Products",
-  //       path: "/admin/products",
-  //     });
-  //   })
-  //   .catch((err) => console.log("err:", err));
 };
 
-// exports.postDeleteProduct = (req, res, next) => {
-//   Product.deleteById(req.body.productID);
-//   res.redirect("/admin/products");
-// };
+exports.postDeleteProduct = (req, res, next) => {
+  Product.deleteByID(req.body.productID)
+    .then(() => {
+      res.redirect("/admin/products");
+    })
+    .catch((err) => console.log("err:", err));
+};

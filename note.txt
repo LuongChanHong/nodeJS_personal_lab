@@ -1,6 +1,5 @@
 Nội dung app:
-- kết nối mongodb
-- tạo model Product trong mongodb db
+- xóa product dùng mongodb
 
 Set up server app: 
 - Tạo file package.json: npm init
