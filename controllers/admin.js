@@ -14,17 +14,30 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-  req.user
-    .createProduct({
-      title: req.body.title,
-      imageUrl: req.body.imageUrl,
-      price: req.body.price,
-      description: req.body.description,
-    })
+  const product = new Product(
+    req.body.title,
+    req.body.price,
+    req.body.description,
+    req.body.imageUrl
+  );
+  product
+    .save()
     .then((result) => {
+      console.log("CREATED ITEM");
       res.redirect("/");
     })
     .catch((err) => console.log("err:", err));
+  // req.user
+  //   .createProduct({
+  //     title: req.body.title,
+  //     imageUrl: req.body.imageUrl,
+  //     price: req.body.price,
+  //     description: req.body.description,
+  //   })
+  //   .then((result) => {
+  //     res.redirect("/");
+  //   })
+  //   .catch((err) => console.log("err:", err));
 };
 
 // exports.postEditProduct = (req, res, next) => {
@@ -62,17 +75,26 @@ exports.postAddProduct = (req, res, next) => {
 //     .catch((err) => console.log("err:", err));
 // };
 
-// exports.getProducts = (req, res, next) => {
-//   Product.findAll()
-//     .then((data) => {
-//       res.render("admin/products", {
-//         prods: data,
-//         pageTitle: "Admin Products",
-//         path: "/admin/products",
-//       });
-//     })
-//     .catch((err) => console.log("err:", err));
-// };
+exports.getProducts = (req, res, next) => {
+  Product.fetchAll()
+    .then((products) => {
+      res.render("admin/products", {
+        prods: products,
+        pageTitle: "Admin Products",
+        path: "/admin/products",
+      });
+    })
+    .catch((err) => console.log("err:", err));
+  // Product.findAll()
+  //   .then((data) => {
+  //     res.render("admin/products", {
+  //       prods: data,
+  //       pageTitle: "Admin Products",
+  //       path: "/admin/products",
+  //     });
+  //   })
+  //   .catch((err) => console.log("err:", err));
+};
 
 // exports.postDeleteProduct = (req, res, next) => {
 //   Product.deleteById(req.body.productID);
