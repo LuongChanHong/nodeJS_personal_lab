@@ -8,6 +8,8 @@ const errorController = require("./controllers/error");
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 
+const User = require("./models/user");
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -24,14 +26,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((request, response, next) => {
-  // User.findByPk(1)
-  //   .then((user) => {
-  //     request.user = user;
-  //     // console.log("request.user:", request.user);
-  //     next();
-  //   })
-  //   .catch((err) => console.log("err:", err));
-  next();
+  User.findByID("635652c316d219afdb97cb89")
+    .then((user) => {
+      request.user = new User(user.name, user.email, user.cart, user._id);
+      // console.log("request.user:", request.user);
+      next();
+    })
+    .catch((err) => console.log("err:", err));
 });
 
 app.use("/admin", adminRoutes);

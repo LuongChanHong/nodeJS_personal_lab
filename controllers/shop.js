@@ -1,5 +1,4 @@
 const Product = require("../models/product");
-const Cart = require("../models/cart");
 const Order = require("../models/order");
 
 exports.getIndex = (req, res, next) => {
@@ -48,43 +47,44 @@ exports.getProduct = (req, res, next) => {
     .catch((err) => console.log("err:", err));
 };
 
-// // exports.getCart = (req, res, next) => {
-// //   res.render("shop/cart", {
-// //     path: "/cart",
-// //     pageTitle: "Your Cart",
-// //   });
-// // };
-
-// exports.postCart = (req, res, next) => {
-//   const productID = req.body.productID;
-//   // console.log("productID:", productID);
-//   let newQuantity = 1;
-//   let _cart;
-//   req.user
-//     .getCart()
-//     .then((cart) => {
-//       _cart = cart;
-//       return cart.getProducts({ where: { id: productID } });
-//     })
-//     .then((products) => {
-//       let product;
-//       // trường hợp đã có product trong cart
-//       if (products.length > 0) {
-//         product = products[0];
-//       }
-//       if (product) {
-//         const oldQuantity = product.cartItem.quantity;
-//         newQuantity = oldQuantity + 1;
-//       }
-//       // trường hợp chưa có product trong cart
-//       return Product.findByPk(productID);
-//     })
-//     .then((product) => {
-//       _cart.addProduct(product, { through: { quantity: newQuantity } });
-//       res.redirect("/cart");
-//     })
-//     .catch((err) => console.log("err:", err));
-// };
+exports.postCart = (req, res, next) => {
+  const productID = req.body.productID;
+  Product.findByID(productID)
+    .then((product) => {
+      return req.user.addToCart(product);
+    })
+    .then((result) => {
+      res.redirect("/cart");
+    })
+    .catch((err) => console.log("err:", err));
+  // console.log("productID:", productID);
+  // let newQuantity = 1;
+  // let _cart;
+  // req.user
+  //   .getCart()
+  //   .then((cart) => {
+  //     _cart = cart;
+  //     return cart.getProducts({ where: { id: productID } });
+  //   })
+  //   .then((products) => {
+  //     let product;
+  //     // trường hợp đã có product trong cart
+  //     if (products.length > 0) {
+  //       product = products[0];
+  //     }
+  //     if (product) {
+  //       const oldQuantity = product.cartItem.quantity;
+  //       newQuantity = oldQuantity + 1;
+  //     }
+  //     // trường hợp chưa có product trong cart
+  //     return Product.findByPk(productID);
+  //   })
+  //   .then((product) => {
+  //     _cart.addProduct(product, { through: { quantity: newQuantity } });
+  //     res.redirect("/cart");
+  //   })
+  //   .catch((err) => console.log("err:", err));
+};
 
 // exports.getOrders = (req, res, next) => {
 //   res.render("shop/orders", {
@@ -100,24 +100,29 @@ exports.getProduct = (req, res, next) => {
 //   });
 // };
 
-// exports.getCart = (req, res, next) => {
-//   req.user
-//     .getCart()
-//     .then((cart) => {
-//       cart
-//         .getProducts()
-//         .then((products) => {
-//           console.log("products:", products);
-//           res.render("shop/cart", {
-//             path: "/cart",
-//             pageTitle: "Your Cart",
-//             products: products,
-//           });
-//         })
-//         .catch((err) => console.log("err:", err));
-//     })
-//     .catch((err) => console.log("err:", err));
-// };
+exports.getCart = (req, res, next) => {
+  let result = [];
+  const cartItems = req.user.cart.items;
+  Product.fetchAll()
+    .then((products) => {
+      cartItems.forEach((item) => {
+        const findProduct = products.find(
+          (prod) => item.productId.toString() === prod._id.toString()
+        );
+        if (findProduct) {
+          delete findProduct.userId;
+          findProduct.quantity = item.quantity;
+          result.push(findProduct);
+        }
+      });
+      res.render("shop/cart", {
+        path: "/cart",
+        pageTitle: "Your Cart",
+        products: result,
+      });
+    })
+    .catch((err) => console.log("err:", err));
+};
 
 // exports.postCartDeleteProduct = (req, res, next) => {
 //   const productsID = req.body.productID;

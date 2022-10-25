@@ -18,26 +18,12 @@ exports.postAddProduct = (req, res, next) => {
     req.body.title,
     req.body.price,
     req.body.description,
-    req.body.imageUrl
+    req.body.imageUrl,
+    null,
+    req.user._id
   );
-  product
-    .save()
-    .then((result) => {
-      console.log("CREATED ITEM");
-      res.redirect("/");
-    })
-    .catch((err) => console.log("err:", err));
-  // req.user
-  //   .createProduct({
-  //     title: req.body.title,
-  //     imageUrl: req.body.imageUrl,
-  //     price: req.body.price,
-  //     description: req.body.description,
-  //   })
-  //   .then((result) => {
-  //     res.redirect("/");
-  //   })
-  //   .catch((err) => console.log("err:", err));
+  product.save();
+  res.redirect("/");
 };
 
 // exports.postEditProduct = (req, res, next) => {
