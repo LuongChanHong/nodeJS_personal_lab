@@ -46,6 +46,77 @@ class User {
       .updateOne({ _id: new mongodb.ObjectId(this._id) }, { $set: setObject });
   }
 
+  deleteCartItem(id) {
+    const updateCartItems = this.cart.items.filter((item) => {
+      return item.productId.toString() != id.toString();
+    });
+    const db = getDB();
+    return db
+      .collection("users")
+      .updateOne(
+        { _id: new mongodb.ObjectId(this._id) },
+        { $set: { cart: { items: updateCartItems } } }
+      );
+  }
+
+  getCart() {
+    let result = [];
+    const db = getDB();
+    return db
+      .collection("products")
+      .find()
+      .toArray()
+      .then((products) => {
+        this.cart.items.forEach((item) => {
+          const findProduct = products.find(
+            (prod) => item.productId.toString() === prod._id.toString()
+          );
+          if (findProduct) {
+            delete findProduct.userId;
+            findProduct.quantity = item.quantity;
+            result.push(findProduct);
+          }
+        });
+        return result;
+      })
+      .catch((err) => console.log("err:", err));
+  }
+
+  createOrder() {
+    return this.getCart()
+      .then((products) => {
+        const newOrders = {
+          items: products,
+          userId: this._id,
+        };
+        const db = getDB();
+        return db
+          .collection("orders")
+          .insertOne(newOrders)
+          .then((result) => {
+            this.cart.items = [];
+            db.collection("users").updateOne(
+              { _id: new mongodb.ObjectId(this._id) },
+              { $set: { cart: { items: [] } } }
+            );
+          })
+          .catch((err) => console.log("err:", err));
+      })
+      .catch((err) => console.log("err:", err));
+  }
+
+  getOrders() {
+    const db = getDB();
+    return db
+      .collection("orders")
+      .find()
+      .toArray()
+      .then((result) => {
+        return result;
+      })
+      .catch((err) => console.log("err:", err));
+  }
+
   static findByID(id) {
     const db = getDB();
     return db.collection("users").findOne({ _id: mongodb.ObjectId(id) });

@@ -1,6 +1,5 @@
 Nội dung app:
-- thêm product vào cart dùng mongodb
-- hiện danh sách product trong cart
+- chuyển cart item thành order dùng mongodb
 
 Set up server app: 
 - Tạo file package.json: npm init
