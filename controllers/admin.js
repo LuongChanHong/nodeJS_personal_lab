@@ -68,7 +68,12 @@ exports.getEditProduct = (req, res, next) => {
     })
     .catch((err) => console.log("err:", err));
 };
+// thêm thuộc tính của collection khác
+// nếu muốn thêm item collection đó vào result của then
+// .find().populate("attribute_name").then
 
+// chọn/ bỏ chọn các thuộc tính muốn được trả về trong result
+// .find().select("attribute_need attribute_need -attribute_dont").then
 exports.getProducts = (req, res, next) => {
   Product.find()
     .then((products) => {

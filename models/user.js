@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { schema } = require("./product");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -24,6 +25,39 @@ const userSchema = new Schema({
     ],
   },
 });
+
+userSchema.methods.addToCart = function (product) {
+  // trường hợp user đã có object cart
+  if (this.cart) {
+    const index = this.cart.items.findIndex(
+      (item) => item.productId.toString() === product._id.toString()
+    );
+    const updateItems = [...this.cart.items];
+    if (index >= 0) {
+      updateItems[index].quantity = updateItems[index].quantity + 1;
+    } else {
+      updateItems.push({
+        productId: product._id,
+        quantity: 1,
+      });
+    }
+    this.cart = {
+      items: updateItems,
+    };
+    // trường hợp user chưa có object cart
+  } else {
+    this.cart = { items: [{ productId: product._id, quantity: 1 }] };
+  }
+  return this.save();
+};
+
+userSchema.methods.deleteFromCart = function (id) {
+  const updateCartItems = this.cart.items.filter((item) => {
+    return item._id.toString() != id.toString();
+  });
+  this.cart.items = updateCartItems;
+  return this.save();
+};
 
 module.exports = mongoose.model("User", userSchema);
 

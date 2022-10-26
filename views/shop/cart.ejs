@@ -13,15 +13,20 @@
         <article class="card product-item">
           <header class="card__header">
             <h1 class="product__title">
-              <%= item.title %> (số lượng: <%= item.quantity %>)
+              <%= item.productId.title %> (số lượng: <%= item.quantity %>)
             </h1>
           </header>
           <div class="card__image">
-            <img src="<%= item.imageUrl %>" alt="<%= item.title %>" />
+            <img
+              src="<%= item.productId.imageUrl %>"
+              alt="<%= item.productId.title %>"
+            />
           </div>
           <div class="card__content">
-            <h2 class="product__price">$ <%= item.price %></h2>
-            <p class="product__description"><%= item.description %></p>
+            <h2 class="product__price">$ <%= item.productId.price %></h2>
+            <p class="product__description">
+              <%= item.productId.description %>
+            </p>
           </div>
           <div class="card__actions">
             <form action="/cart-delete-item" method="POST">

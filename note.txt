@@ -1,6 +1,5 @@
 Nội dung app:
-- cài đặt mongoose
-- thêm user model dùng mongoose
+- thêm, xóa cart item bằng mongoose
 
 Set up server app: 
 - Tạo file package.json: npm init
