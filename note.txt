@@ -1,5 +1,6 @@
 Nội dung app:
-- chuyển cart item thành order dùng mongodb
+- cài đặt mongoose
+- thêm, xóa, sửa product item dùng mongoose
 
 Set up server app: 
 - Tạo file package.json: npm init
